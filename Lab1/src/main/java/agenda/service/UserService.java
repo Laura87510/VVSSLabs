@@ -16,4 +16,8 @@ public class UserService {
 
         return user.isPassword(password);
     }
+
+    public User getUserByUsername(String username) {
+        return repositoryUser.getByUsername(username);
+    }
 }

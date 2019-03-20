@@ -6,14 +6,14 @@ public class Contact {
 	private String Name;
 	private String Address;
 	private String Telefon;
-	
-	public Contact(){
+
+	public Contact() {
 		Name = "";
 		Address = "";
 		Telefon = "";
 	}
-	
-	public Contact(String name, String address, String telefon) throws InvalidFormatException{
+
+	public Contact(String name, String address, String telefon) throws InvalidFormatException {
 		if (!validTelefon(telefon)) throw new InvalidFormatException("Cannot convert", "Invalid phone number");
 		if (!validName(name)) throw new InvalidFormatException("Cannot convert", "Invalid name");
 		if (!validAddress(address)) throw new InvalidFormatException("Cannot convert", "Invalid address");
@@ -49,17 +49,16 @@ public class Contact {
 		Telefon = telefon;
 	}
 
-	public static Contact fromString(String str, String delim) throws InvalidFormatException
-	{
+	public static Contact fromString(String str, String delim) throws InvalidFormatException {
 		String[] s = str.split(delim);
-		if (s.length!=4) throw new InvalidFormatException("Cannot convert", "Invalid data");
+		if (s.length != 4) throw new InvalidFormatException("Cannot convert", "Invalid data");
 		if (!validTelefon(s[2])) throw new InvalidFormatException("Cannot convert", "Invalid phone number");
 		if (!validName(s[0])) throw new InvalidFormatException("Cannot convert", "Invalid name");
 		if (!validAddress(s[1])) throw new InvalidFormatException("Cannot convert", "Invalid address");
-		
+
 		return new Contact(s[0], s[1], s[2]);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -71,13 +70,11 @@ public class Contact {
 		sb.append("#");
 		return sb.toString();
 	}
-	
+
 	private static boolean validName(String str)
 	{
-		
-		String[] s = str.split("[\\p{Punct}\\s]+");
-		if (s.length>2) return false;
-		return true;
+		if (str.matches("[A-Za-z]+")) return true;
+		return false;
 	}
 	
 	private static boolean validAddress(String str)

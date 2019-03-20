@@ -45,8 +45,11 @@ public class MainClass {
 				System.out.printf("Enter password: ");
 				String password = in.readLine();
 
-				if (!userService.isUserValid(username,password))
+				if (!userService.isUserValid(username,password)) {
 					user = null;
+				} else {
+					user = userService.getUserByUsername(username);
+				}
 			}
 
 			int chosen = 0;
@@ -156,20 +159,12 @@ public class MainClass {
 			String adress = in.readLine();
 			System.out.printf("Numar de telefon: ");
 			String telefon = in.readLine();
-			
-			Contact c = new Contact(name, adress, telefon);
 
-			contactService.add(c);
+			contactService.add(name, adress, telefon);
 
 			System.out.printf("S-a adugat cu succes\n");
 		} catch (IOException e) {
 			System.out.printf("Eroare de citire: %s\n" + e.getMessage());
-		} catch (InvalidFormatException e) {
-			if (e.getCause() != null)
-				System.out.printf("Eroare: %s - %s\n" + e.getMessage(), e
-						.getCause().getMessage());
-			else
-				System.out.printf("Eroare: %s\n" + e.getMessage());
 		}
 
 	}
