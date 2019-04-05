@@ -22,10 +22,10 @@ public class Activity {
 		else
 			this.contacts = new LinkedList<Contact>(contacts);
 
-		this.start = new Date();
-		this.start.setTime(start.getTime());
-		this.end = new Date();
-		this.end.setTime(end.getTime());
+		this.start = start;
+//		this.start.setTime(start.getTime());
+		this.end = end;
+//		this.end.setTime(end.getTime());
 	}
 
 	public String getName() {

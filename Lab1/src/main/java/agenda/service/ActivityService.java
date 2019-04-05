@@ -18,8 +18,8 @@ public class ActivityService {
         repositoryActivity = new RepositoryActivityFile(repositoryContact);
     }
 
-    public void add(Activity activity) {
-        repositoryActivity.addActivity(activity);
+    public boolean add(Activity activity) {
+        return repositoryActivity.addActivity(activity);
     }
 
     public List<Activity> getAllByDate(String userName, Date date) {

@@ -84,11 +84,12 @@ public class Contact {
 	
 	private static boolean validTelefon(String tel)
 	{
-		String[] s = tel.split("[\\p{Punct}\\s]+");
-		if (tel.charAt(0) == '+' && s.length == 2 ) return true;
-		if (tel.charAt(0) != '0')return false;
-		if (s.length != 1) return false;
-		return true;
+		if(tel.matches("[+]{1}[0-9]{10}")) return true;
+//		String[] s = tel.split("[\\p{Punct}\\s]+");
+//		if (tel.charAt(0) == '+' && s.length == 2 ) return true;
+//		if (tel.charAt(0) != '0')return false;
+//		if (s.length != 1) return false;
+		return false;
 	}
 	
 		

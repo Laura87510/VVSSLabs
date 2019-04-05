@@ -30,8 +30,9 @@ public class RepositoryActivityFile implements RepositoryActivity{
 			int i = 0;
 			while (( line = br.readLine())!= null)
 			{
+				System.out.println(line);
 				Activity act = Activity.fromString(line, repcon);
-				if (act == null) 
+				if (act == null)
 					throw new Exception("Error in file at line "+i, new Throwable("Invalid Activity"));
 				activities.add(act);
 				i++;
@@ -53,12 +54,16 @@ public class RepositoryActivityFile implements RepositoryActivity{
 	public boolean addActivity(Activity activity) {
 		int  i = 0;
 		boolean conflicts = false;
-		
+		if (activity.getStart().compareTo(activity.getEnd()) > 0) {
+			return false;
+		}
+
 		while( i < activities.size() )
 		{
 			if ( activities.get(i).getStart().compareTo(activity.getEnd()) < 0 &&
-					activity.getStart().compareTo(activities.get(i).getEnd()) < 0 )
+					activity.getStart().compareTo(activities.get(i).getEnd()) < 0 ) {
 				conflicts = true;
+			}
 			i++;
 		}
 		if ( !conflicts )
@@ -67,14 +72,6 @@ public class RepositoryActivityFile implements RepositoryActivity{
 			return true;
 		}
 		return false;
-//		for (int i = 0; i< activities.size(); i++)
-//		{
-//			if (activity.intersect(activities.get(i))) return false;
-//		}	
-//		int index = activities.indexOf(activity);
-//		//if (index >= 0 ) return false;
-//		activities.add(activity);
-//		return true;
 	}
 
 	@Override
